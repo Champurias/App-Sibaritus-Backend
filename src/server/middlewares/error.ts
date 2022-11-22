@@ -19,7 +19,7 @@ export const generalError = (
 ) => {
   debug(chalk.red(`Error ${error.message}`));
   const status = error.state ?? 500;
-  const message = error.customMessage || "Opps...General Error";
+  const message = error.customMessage || "General error";
 
   res.status(status).json({ error: message });
   next();
