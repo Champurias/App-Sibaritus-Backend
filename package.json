@@ -9,7 +9,7 @@
     "build:dev": "tsc -w",
     "start": "node .",
     "start:dev": "nodemon . -q",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "test:dev": "jest --watchAll",
     "test:coverage": "jest --coverage --watchAll=false --passWithNoTests",
     "prepare": "husky install"
@@ -45,6 +45,5 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
     "mongoose": "^6.7.2"
-    
   }
 }

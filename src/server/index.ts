@@ -1,7 +1,7 @@
-import enviroment from "../loadEnviroment";
+import enviroment from "../loadEnviroment.js";
 import debugCreator from "debug";
 import chalk from "chalk";
-import app from "./app";
+import app from "./app.js";
 
 const debug = debugCreator(`${enviroment.debug}server`);
 
