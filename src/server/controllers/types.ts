@@ -1,13 +1,13 @@
 import type mongoose from "mongoose";
 
 export interface RegisterUser {
-  name: string;
+  username: string;
   password: string;
   email: string;
 }
 
 export interface UserResponse {
-  name: string;
+  username: string;
   email: string;
   id: mongoose.Types.ObjectId;
 }
