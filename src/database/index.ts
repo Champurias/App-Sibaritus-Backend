@@ -1,17 +1,16 @@
-import enviroment from "../loadEnviroment.js";
+import "../loadEnviroment.js";
 import mongoose from "mongoose";
 import debugCreator from "debug";
 import chalk from "chalk";
 
-const debug = debugCreator(`${enviroment.debug}database`);
+const debug = debugCreator("experiencias:root");
 
 const connectToDataBase = async (url: string) => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     await mongoose.connect(url);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+
     mongoose.set("debug", process.env.DEBUG === "true");
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+
     mongoose.set("toJSON", {
       virtuals: true,
       transform(doc, ret) {

@@ -3,7 +3,7 @@ import debugCreator from "debug";
 import chalk from "chalk";
 import app from "./app.js";
 
-const debug = debugCreator(`${enviroment.debug}server`);
+const debug = debugCreator("experiencias:root");
 
 const startServer = async (port: string) => {
   await new Promise((resolve, reject) => {
