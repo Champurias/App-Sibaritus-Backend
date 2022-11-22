@@ -1,7 +1,7 @@
 import enviroment from "../../loadEnviroment.js";
 import debugCreator from "debug";
 import chalk from "chalk";
-import type CustomError from "../customError/customError.js";
+import type CustomError from "../CustomError/CustomError.js";
 import type { Request, Response, NextFunction } from "express";
 
 const debug = debugCreator(`${enviroment.debug}middlewares`);
