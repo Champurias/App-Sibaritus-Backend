@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import enviroment from "../loadEnviroment";
+import enviroment from "../loadEnviroment.js";
 import debugCreator from "debug";
 import chalk from "chalk";
 
