@@ -1,4 +1,4 @@
-import CustomError from "../patata/patata";
+import CustomError from "../CustomError/CustomError";
 import { generalError, unknownEndpoint } from "./error";
 import type { Response } from "express";
 
