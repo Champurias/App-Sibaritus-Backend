@@ -1,11 +1,10 @@
 import type { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import User from "../../database/models/users/users";
-import type { UserResponse } from "./types";
-import { RegisterUser } from "./types";
 import CustomError from "../CustomError/CustomError";
+import type { RegisterUser } from "./types";
 
-const RegisterUser = async (
+const registerUser = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -20,7 +19,7 @@ const RegisterUser = async (
       email,
     });
 
-    res.status(201).json({ messsage: `${user.username} registred` });
+    res.status(201).json({ message: `${user.username} registred` });
   } catch (error: unknown) {
     const customError = new CustomError(
       (error as Error).message,
@@ -31,3 +30,5 @@ const RegisterUser = async (
     next(customError);
   }
 };
+
+export default registerUser;
