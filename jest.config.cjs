@@ -9,6 +9,6 @@ module.exports = {
     "!src/index.ts",
     "!src/loadEnvironment.ts",
     "!src/**/index.ts",
-    "!src/app.ts",
+    "!src/**/app.ts",
   ],
 };

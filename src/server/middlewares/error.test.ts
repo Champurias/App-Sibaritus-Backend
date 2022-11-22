@@ -1,4 +1,4 @@
-import CustomError from "../CustomError/CustomError";
+import type CustomError from "../CustomError/CustomError";
 import { generalError, unknownEndpoint } from "./error";
 import type { Response } from "express";
 
@@ -35,11 +35,11 @@ describe("Given a endpointUnknown middlewear", () => {
 
 describe("Given a generalError error", () => {
   describe("When its receives a response with a customError message", () => {
-    const error = new CustomError("");
+    const error = new Error("");
     test("Then it should call its method status with 500", () => {
       const status = 500;
 
-      generalError(error, null, res as Response, () => {});
+      generalError(error as CustomError, null, res as Response, () => {});
 
       expect(res.status).toHaveBeenCalledWith(status);
     });
@@ -49,7 +49,7 @@ describe("Given a generalError error", () => {
         error: "General error",
       };
 
-      generalError(error, null, res as Response, () => {});
+      generalError(error as CustomError, null, res as Response, () => {});
 
       expect(res.json).toHaveBeenCalledWith(errormessage);
     });
