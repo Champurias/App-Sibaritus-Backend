@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import User from "../../database/models/users/users.js";
+import User from "../../database/models/users/User.js";
 import CustomError from "../CustomError/CustomError.js";
 import type { RegisterUser } from "./types.js";
 

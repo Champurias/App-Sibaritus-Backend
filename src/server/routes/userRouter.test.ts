@@ -4,7 +4,7 @@ import request from "supertest";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import app from "../app.js";
 import connectToDataBase from "../../database/index.js";
-import User from "../../database/models/users/users.js";
+import User from "../../database/models/users/User.js";
 
 let server: MongoMemoryServer;
 
