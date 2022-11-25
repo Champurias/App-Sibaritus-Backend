@@ -5,26 +5,13 @@ import userRouter from "./routes/userRouter.js";
 import cors from "cors";
 
 const app = express();
-
 app.use(
   cors({
-    origin(requestOrigin, callback) {
-      if (
-        !requestOrigin ||
-        [
-          "https://david-cuartas-front-final-202209.netlify.app/",
-          "http://localhost:3000",
-          "http://localhost:4007",
-        ].includes(requestOrigin)
-      ) {
-        callback(null, requestOrigin);
-        return;
-      }
-
-      const error = new Error("No authorization request origin");
-
-      callback(error);
-    },
+    origin: [
+      "https://david-cuartas-front-final-202209.netlify.app",
+      "http://localhost:3000",
+      "http://localhost:4007",
+    ],
   })
 );
 
