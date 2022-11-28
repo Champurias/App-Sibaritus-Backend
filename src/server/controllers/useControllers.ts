@@ -2,9 +2,11 @@ import type { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import User from "../../database/models/users/User.js";
 import CustomError from "../CustomError/CustomError.js";
-import type { RegisterUser } from "./types.js";
+import type { Credentials, RegisterUser, UserTokenPayload } from "./types.js";
+import jwt from "jsonwebtoken";
+import enviroment from "../../loadEnviroment.js";
 
-const registerUser = async (
+export const registerUser = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -31,4 +33,43 @@ const registerUser = async (
   }
 };
 
-export default registerUser;
+export const loginUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { username, password } = req.body as Credentials;
+
+  const user = await User.findOne({ username });
+
+  if (!user) {
+    const error = new CustomError(
+      "usuario incorrecto",
+      401,
+      "wrong credentials"
+    );
+    next(error);
+    return;
+  }
+
+  if (!(await bcrypt.compare(password, user.password))) {
+    const error = new CustomError(
+      "Password incorrecta",
+      401,
+      "wrong credentials"
+    );
+    next(error);
+    return;
+  }
+
+  const tokenPayload: UserTokenPayload = {
+    id: user._id.toString(),
+    username,
+  };
+
+  const token = jwt.sign(tokenPayload, enviroment.jwtSecret, {
+    expiresIn: "2d",
+  });
+
+  res.status(200).json({ token });
+};

@@ -1,3 +1,4 @@
+import type { JwtPayload } from "jsonwebtoken";
 import type mongoose from "mongoose";
 
 export interface RegisterUser {
@@ -15,4 +16,9 @@ export interface UserResponse {
 export interface Credentials {
   username: string;
   password: string;
+}
+
+export interface UserTokenPayload extends JwtPayload {
+  id: string;
+  username: string;
 }
