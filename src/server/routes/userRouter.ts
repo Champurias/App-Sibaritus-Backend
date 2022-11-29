@@ -1,8 +1,10 @@
 import express from "express";
 import { validate } from "express-validation";
 import { loginUserSchema, userSchema } from "../../schemas/userSchema.js";
-
-import { loginUser, registerUser } from "../controllers/useControllers.js";
+import {
+  loginUser,
+  registerUser,
+} from "../controllers/userController/useControllers.js";
 
 // eslint-disable-next-line new-cap
 export const userRouter = express.Router();
