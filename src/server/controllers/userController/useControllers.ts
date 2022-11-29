@@ -1,10 +1,10 @@
 import type { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import User from "../../database/models/users/User.js";
-import CustomError from "../CustomError/CustomError.js";
-import type { Credentials, RegisterUser, UserTokenPayload } from "./types.js";
 import jwt from "jsonwebtoken";
-import enviroment from "../../loadEnviroment.js";
+import type { Credentials, RegisterUser, UserTokenPayload } from "../types.js";
+import User from "../../../database/models/users/User.js";
+import CustomError from "../../CustomError/CustomError.js";
+import enviroment from "../../../loadEnviroment.js";
 
 export const registerUser = async (
   req: Request,

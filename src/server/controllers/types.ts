@@ -22,3 +22,10 @@ export interface UserTokenPayload extends JwtPayload {
   id: string;
   username: string;
 }
+
+export interface RegisterExperience {
+  owner: string;
+  location: string;
+  price: number;
+  detail: string;
+}
