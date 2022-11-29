@@ -3,7 +3,7 @@ import express from "express";
 import { generalError, unknownEndpoint } from "./middlewares/error.js";
 import userRouter from "./routes/userRouter.js";
 import cors from "cors";
-import { experienceRouter } from "./routes/experienceRoutes.js";
+import { experienceRouter } from "./routes/experiencesRouters/experienceRoutes.js";
 
 const app = express();
 app.use(
