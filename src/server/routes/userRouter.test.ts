@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import request from "supertest";
-
 import { MongoMemoryServer } from "mongodb-memory-server";
 import app from "../app.js";
 import connectToDataBase from "../../database/index.js";
