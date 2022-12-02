@@ -5,6 +5,18 @@ const experienceSchema = new Schema({
     type: String,
     required: true,
   },
+  title: {
+    type: String,
+    required: true,
+  },
+  picture: {
+    type: String,
+    required: true,
+  },
+  pictureBackUp: {
+    type: String,
+    required: true,
+  },
   location: {
     type: String,
     required: true,

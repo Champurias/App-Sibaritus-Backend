@@ -22,3 +22,4 @@ userRouter.post(
   validate(loginUserSchema, {}, { abortEarly: false }),
   loginUser
 );
+

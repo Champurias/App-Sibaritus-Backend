@@ -19,3 +19,23 @@ export const getExperiencies = async (
     next(throwError);
   }
 };
+
+export const deleteExperience = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { experienceId } = req.params;
+    const deleteExperience = await Experience.findByIdAndDelete(experienceId);
+
+    res.status(200).json(deleteExperience);
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      (error as Error).message,
+      404,
+      "Experiencia no encontrada"
+    );
+    next(customError);
+  }
+};
