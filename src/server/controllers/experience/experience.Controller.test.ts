@@ -1,8 +1,12 @@
 import type { NextFunction, Request, Response } from "express";
-import Experience from "../../../database/models/users/Experience";
-import { mockExperience } from "../../../mock/mockExperience";
+import { Experience } from "../../../database/models/users/Experience";
+import { mockExperience } from "../../../mocks/mockExperience";
 import CustomError from "../../CustomError/CustomError";
-import { deleteExperience, getExperiencies } from "./experienceController";
+import {
+  createExperience,
+  deleteExperience,
+  getExperiencies,
+} from "./experienceController";
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -87,6 +91,47 @@ describe("Given a deleteExperience controller", () => {
       );
 
       expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
+});
+
+describe("Given a createExperience controller", () => {
+  describe("When it receives a request body with desired parameters", () => {
+    test("Then is should call its method with status 200", async () => {
+      const expectedStatus = 201;
+      const experience = mockExperience;
+
+      const req: Partial<Request> = {
+        body: experience,
+      };
+
+      Experience.create = jest.fn().mockResolvedValue(experience);
+
+      await createExperience(
+        req as Request,
+        res as Response,
+        next as NextFunction
+      );
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+    });
+  });
+  describe("When it receives a response with an error", () => {
+    test("Then it should call teh text function with a customError", async () => {
+      const customError = new CustomError(
+        "",
+        500,
+        "no se ha podido crear la experiencia"
+      );
+      const req: Partial<Request> = {
+        body: {},
+      };
+      Experience.create = jest.fn().mockRejectedValue(customError);
+      await createExperience(
+        req as Request,
+        res as Response,
+        next as NextFunction
+      );
+      expect(next).toHaveBeenCalledWith(customError);
     });
   });
 });

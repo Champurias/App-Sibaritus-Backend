@@ -1,3 +1,4 @@
+import type { InferSchemaType } from "mongoose";
 import { model, Schema } from "mongoose";
 
 const experienceSchema = new Schema({
@@ -29,8 +30,11 @@ const experienceSchema = new Schema({
     type: String,
     required: true,
   },
+  ownerId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
 });
+export type ExperienceStructure = InferSchemaType<typeof experienceSchema>;
 
-const Experience = model("Experience", experienceSchema, "experiencias");
-
-export default Experience;
+export const Experience = model("Experience", experienceSchema, "experiencias");
