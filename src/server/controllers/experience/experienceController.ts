@@ -49,7 +49,7 @@ export const createExperience = async (
   try {
     const newExperience = await Experience.create(req.body);
 
-    res.status(200).json(newExperience);
+    res.status(201).json(newExperience);
   } catch (error: unknown) {
     const customError = new CustomError(
       (error as Error).message,
