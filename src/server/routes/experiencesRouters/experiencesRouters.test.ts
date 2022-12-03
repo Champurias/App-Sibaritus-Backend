@@ -2,8 +2,8 @@ import request from "supertest";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import connectToDataBase from "../../../database";
-import Experience from "../../../database/models/users/Experience";
 import app from "../../app";
+import { Experience } from "../../../database/models/users/Experience";
 
 let server: MongoMemoryServer;
 

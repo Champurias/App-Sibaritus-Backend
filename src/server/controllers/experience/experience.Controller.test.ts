@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import Experience from "../../../database/models/users/Experience";
-import { mockExperience } from "../../../mock/mockExperience";
+import { Experience } from "../../../database/models/users/Experience";
+import { mockExperience } from "../../../mocks/mockExperience";
 import CustomError from "../../CustomError/CustomError";
 import { deleteExperience, getExperiencies } from "./experienceController";
 
