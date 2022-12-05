@@ -59,3 +59,34 @@ export const createExperience = async (
     next(customError);
   }
 };
+
+export const getExperience = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { experienceId } = req.params;
+
+  try {
+    const experience = await Experience.findById(experienceId);
+
+    if (!experience) {
+      const customError = new CustomError(
+        "Experiencia no encontrada",
+        404,
+        "Experiencia no encontrada"
+      );
+      next(customError);
+      return;
+    }
+
+    res.status(200).json(experience);
+  } catch (error: unknown) {
+    const customError = new CustomError(
+      (error as Error).message,
+      400,
+      "Experiencia no encontrada"
+    );
+    next(customError);
+  }
+};

@@ -1,10 +1,12 @@
 import type { NextFunction, Request, Response } from "express";
+import mongoose from "mongoose";
 import { Experience } from "../../../database/models/users/Experience";
 import { mockExperience } from "../../../mocks/mockExperience";
 import CustomError from "../../CustomError/CustomError";
 import {
   createExperience,
   deleteExperience,
+  getExperience,
   getExperiencies,
 } from "./experienceController";
 
@@ -16,6 +18,7 @@ const res: Partial<Response> = {
   status: jest.fn().mockReturnThis(),
   json: jest.fn(),
 };
+const req: Partial<Request> = {};
 
 const next = jest.fn().mockReturnThis();
 
@@ -132,6 +135,65 @@ describe("Given a createExperience controller", () => {
         next as NextFunction
       );
       expect(next).toHaveBeenCalledWith(customError);
+    });
+  });
+});
+
+describe("Given a getExperienceId", () => {
+  describe("When it recieves a request with a venueId in it's body", () => {
+    test("Then it should return a response and call its status method with 200 and its json method found venue", async () => {
+      const expectedStatus = 200;
+      const idToFind = new mongoose.Types.ObjectId();
+      const experienceToFind = getExperience;
+      req.params = { exprienceId: idToFind.toString() };
+
+      Experience.findById = jest.fn().mockResolvedValueOnce(experienceToFind);
+
+      await getExperience(
+        req as Request,
+        res as Response,
+        next as NextFunction
+      );
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      expect(res.json).toHaveBeenCalledWith(experienceToFind);
+    });
+  });
+  describe("When it receives a request with a wrong ExperienceId in it's body", () => {
+    test("Then next function should be called with a noexperienceFpund error", async () => {
+      const expectedError = new CustomError(
+        "Experiencia no encontrada",
+        400,
+        "Experiencia no encontrada"
+      );
+      Experience.findById = jest.fn().mockResolvedValueOnce(undefined);
+
+      await getExperience(
+        req as Request,
+        res as Response,
+        next as NextFunction
+      );
+      expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
+  describe("When it receives a request without a experienceId in it's body", () => {
+    test("Then next function should be called with a customError", async () => {
+      req.params = { experience: "" };
+      const expectedError = new CustomError(
+        "Experiencia no encontrada",
+        400,
+        "Experiencia no encontrada"
+      );
+      Experience.findById = jest
+        .fn()
+        .mockRejectedValueOnce(new Error("Experiencia no encontrada"));
+
+      await getExperience(
+        req as Request,
+        res as Response,
+        next as NextFunction
+      );
+      expect(next).toHaveBeenCalledWith(expectedError);
     });
   });
 });
