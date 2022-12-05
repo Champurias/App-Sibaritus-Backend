@@ -43,6 +43,7 @@ describe("Given a Post method /users/register endpoint", () => {
       expect(response.body).toStrictEqual(expectedMessage);
     });
   });
+
   describe("When it receives a request username 'hulio' and this username exists in the database ", () => {
     test("Then it should respond with a response status 500, and the message 'General Error'", async () => {
       const expectedStatus = 500;

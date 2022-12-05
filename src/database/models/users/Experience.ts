@@ -12,11 +12,9 @@ const experienceSchema = new Schema({
   },
   picture: {
     type: String,
-    required: true,
   },
   pictureBackUp: {
     type: String,
-    required: true,
   },
   location: {
     type: String,
